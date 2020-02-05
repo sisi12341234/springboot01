@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.example.listtest.dao.ConDao"    >
+    <!-- 填写数据库里实例Person对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">consume</sql>
+
+    <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
+    <!-- 查询所有   -->
+    <select id="getAll" resultType="com.example.listtest.model.Consume">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+    </select>
+    <select id="getConById" resultType="com.example.listtest.model.Consume">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+        where consume_id=#{consume_id}
+    </select>
+    <insert id="insertAll" parameterType="com.example.listtest.model.Consume">
+        insert into
+        <include refid="table" />
+        (consume_name,consume_user_id,consume_money)
+        values
+        (#{consume_name},#{consume_user_id},#{consume_money})
+    </insert>
+    <update id="updatecon" parameterType="com.example.listtest.model.Consume">
+        update <include refid="table" />
+        set
+        consume_name=#{consume_name},
+        consume_user_id=#{consume_user_id},
+        consume_money=#{consume_money}
+        where consume_id=#{consume_id}
+    </update>
+    <delete id="deletecon" parameterType="com.example.listtest.model.Consume">
+        delete from <include refid="table" />
+        where consume_id=#{consume_id}
+    </delete>
+</mapper>

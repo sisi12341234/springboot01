@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.example.listtest.dao.OrderDao"    >
+    <!-- 填写数据库里实例Person对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">orline</sql>
+
+    <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
+    <!-- 查询所有   -->
+    <select id="getAll" resultType="com.example.listtest.model.Order">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+    </select>
+    <select id="getOrderById" resultType="com.example.listtest.model.Order">
+    SELECT
+    *
+    FROM
+    <include refid="table" />
+    where order_id=#{order_id}
+    </select>
+    <select id="getOrderName" resultType="com.example.listtest.model.Order">
+        SELECT
+        order_id,order_user_id,order_date,order_event,order_telephone,order_sign,
+        (select user_name from user where user_id = order_user_id) as name
+        FROM
+        <include refid="table" />
+    </select>
+    <select id="getOrNameById" resultType="com.example.listtest.model.Order">
+        SELECT
+        order_id,order_user_id,order_date,order_event,order_telephone,order_sign,
+        (select user_name from user where user_id = order_user_id) as name
+        FROM
+        <include refid="table" />
+        where order_id=#{order_id}
+    </select>
+    <insert id="insertAll" parameterType="com.example.listtest.model.Order">
+        insert into
+        <include refid="table" />
+        (order_user_id,order_date,order_event,order_telephone,order_sign)
+        values
+        (#{order_user_id},#{order_date},#{order_event},#{order_telephone},#{order_sign})
+    </insert>
+    <update id="updateorder" parameterType="com.example.listtest.model.Order">
+        update <include refid="table" />
+        set
+        order_user_id=#{order_user_id},
+        order_date=#{order_date},
+        order_event=#{order_event},
+        order_telephone=#{order_telephone},
+        order_sign=#{order_sign}
+        where order_id=#{order_id}
+    </update>
+    <delete id="deleteorder" parameterType="com.example.listtest.model.Order">
+        delete from <include refid="table" />
+        where order_id=#{order_id}
+    </delete>
+    <!--获取该用户的预约信息-->
+    <select id="getByUser" resultType="com.example.listtest.model.Order">
+        SELECT
+        order_user_id,order_date,order_event,order_telephone,order_sign,
+        (select user_name from user where user_id = order_user_id) as name
+        FROM
+        <include refid="table" />
+        where order_user_id=#{order_user_id}
+    </select>
+</mapper>

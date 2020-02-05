@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.example.listtest.dao.WanDao"    >
+    <!-- 填写数据库里实例Person对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">wandering</sql>
+
+    <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
+    <!-- 查询所有   -->
+    <select id="getAll" resultType="com.example.listtest.model.Wandering">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+    </select>
+    <select id="getWanById" resultType="com.example.listtest.model.Wandering">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+        where wandering_id=#{wandering_id}
+    </select>
+    <insert id="insertAll" parameterType="com.example.listtest.model.Wandering">
+        insert into
+        <include refid="table" />
+        (wandering_type,wandering_picture,wandering_date,wandering_health,wandering_sign)
+        values
+        (#{wandering_type},#{wandering_picture},#{wandering_date},#{wandering_health},#{wandering_sign})
+    </insert>
+    <update id="updatewan" parameterType="com.example.listtest.model.Wandering">
+        update <include refid="table" />
+        set
+        wandering_type=#{wandering_type},
+        wandering_picture=#{wandering_picture},
+        wandering_date=#{wandering_date},
+        wandering_health=#{wandering_health},
+        wandering_sign=#{wandering_sign}
+        where wandering_id=#{wandering_id}
+    </update>
+    <delete id="deletewan" parameterType="com.example.listtest.model.Wandering">
+        delete from <include refid="table" />
+        where wandering_id=#{wandering_id}
+    </delete>
+</mapper>

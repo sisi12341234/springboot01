@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 这里填写对应的Dao文件所在的路径 -->
+<mapper namespace="com.example.listtest.dao.UserDao"    >
+    <!-- 填写数据库里实例Person对应的表的表名 -->
+    <!-- 这里是作为一个变量使用 -->
+    <sql id="table">user</sql>
+
+    <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
+    <!-- 查询所有   -->
+    <select id="getAll" resultType="com.example.listtest.model.User">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+    </select>
+    <select id="getUser" resultType="com.example.listtest.model.User">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+        where user_power &lt;&gt; 0
+    </select>
+    <select id="getUserById" resultType="com.example.listtest.model.User">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+        where user_id=#{user_id}
+    </select>
+    <insert id="insertAll" parameterType="com.example.listtest.model.User">
+        insert into
+        <include refid="table" />
+        (user_name,user_password,user_telephone,user_address,user_email,user_power,user_date)
+        values
+        (#{user_name},#{user_password},#{user_telephone},#{user_address},#{user_email},#{user_power},#{user_date})
+    </insert>
+    <update id="updateAdmin" parameterType="com.example.listtest.model.User">
+        update <include refid="table" />
+        set
+            user_name=#{user_name},
+            user_password=#{user_password},
+            user_telephone=#{user_telephone},
+            user_address=#{user_address},
+            user_email=#{user_email}
+        where user_id=#{user_id}
+    </update>
+    <update id="updateuser" parameterType="com.example.listtest.model.User">
+        update <include refid="table" />
+        set
+        user_name=#{user_name},
+        user_password=#{user_password},
+        user_telephone=#{user_telephone},
+        user_address=#{user_address},
+        user_email=#{user_email},
+        user_power=#{user_power}
+        where user_id=#{user_id}
+    </update>
+    <delete id="deleteuser" parameterType="com.example.listtest.model.User">
+        delete from <include refid="table" />
+        where user_id=#{user_id}
+    </delete>
+</mapper>

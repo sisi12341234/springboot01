@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Services</title>
+    <link href="main/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="main/date/jedate/jedate.js"></script>
+</head>
+<body>
+<div class="wrap-box"> </div>
+<div class="header">
+    <div class="wrap">
+        <div class="header-top">
+            <div class="cssmenu">
+                <ul>
+                    <li><a href="/main.html"><span>Home</span></a></li>
+                    <li><a href="/about.html"><span>About us</span></a></li>
+                    <li class="active"><a href="/services.html"><span>Services</span></a></li>
+                    <li><a href="/gallery.html"><span>Gallery</span></a></li>
+                    <li class="last"><a href="/contact.html"><span>Reserve</span></a></li>
+                    <li><a href="/login.html"><span>login</span></a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="wrap">
+        <div class="about">
+            <div class="about-top">
+                <div class="col span_1_of_about">
+                    <h3>Featured Services</h3>
+                    <div class="services-box">
+                        <div class="col_1_of_2 span_1_of_2">
+                            <div class="contact-form">
+                                <h3>预约填写</h3>
+                                <form method="post" action="contact-post.html">
+                                    <div>
+                                        <span><label>Event</label></span>
+                                        <span>
+                                            <input type="text" name="event" class="form-control form-control-line" th:list="list">
+                                            <datalist id="list">
+                                                <option>洗浴</option>
+                                                <option>剪毛</option>
+                                                <option>除虫</option>
+                                                <option>寄养</option>
+                                                <option>宠物乐园</option>
+                                            </datalist>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span><label>Telephone</label></span>
+                                        <span><input type="text" name="telephone" class="form-control form-control-line"></span>
+                                    </div>
+                                    <div>
+                                        <span><label>Date</label></span>
+                                        <span><input id="indate" type="text" name="date" class="form-control form-control-line"></span>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-success">Insert reserve</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="services-box">
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="col span_1_of_about1">
+                    <h3>我的预约</h3>
+                    <div class="sidebar-nav">
+                        <div class="table-responsive">
+                            <table class="tablelist" id="table">
+                                <thead>
+                                <tr>
+                                    <th>预约日期</th>
+                                    <th>预约事件</th>
+                                    <th>预约电话</th>
+                                    <th>预约标志</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr  th:each="item: ${orderlist}" th:width="50">
+                                    <td th:text="${{item.order_date}}"></td>
+                                    <td th:text="${{item.order_event}}"></td>
+                                    <td th:text="${{item.order_telephone}}"></td>
+                                    <td th:text="${{item.order_sign}}=='true'?'是':'否'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="wrap">
+        <div class="footer-top">
+            <div class="col_1_of_4 span_1_of_4">
+                <h3>INFORMATION</h3>
+                <ul class="first">
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Terms and conditions</a></li>
+                    <li><a href="#">Legal Notice</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h3>CATEGORIES</h3>
+                <ul class="first">
+                    <li><a href="#">New products</a></li>
+                    <li><a href="#">top sellers</a></li>
+                    <li><a href="#">Specials</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h3>My ACCOUNT</h3>
+                <ul class="first">
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Personal info</a></li>
+                    <li><a href="#">Prices</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4 footer-lastgrid">
+                <h3>CONTACT US</h3>
+                <ul class="follow_icon">
+                    <li><a href="#"><img src="main/images/fb.png" alt=""></a></li>
+                    <li><a href="#"><img src="main/images/rss.png" alt=""></a></li>
+                    <li><a href="#"><img src="main/images/tw.png" alt=""></a></li>
+                    <li><a href="#"><img src="main/images/g+.png" alt=""></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script src="main/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#table").dataTable({
+            "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
+            "aLengthMenu" : [5, 10, 15], //更改显示记录数选项
+            "sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页
+            "bAutoWidth" : true, //是否自适应宽度
+            //"bJQueryUI" : true,
+            "oLanguage": { //国际化配置
+                "sProcessing" : "正在获取数据，请稍后...",
+                "sLengthMenu" : "显示 _MENU_ 条",
+                "sZeroRecords" : "没有您要搜索的内容",
+                "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                "sInfoEmpty" : "记录数为0",
+                "sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+                "sInfoPostFix" : "",
+                "sSearch" : "搜索",
+                "sUrl" : "",
+                "oPaginate": {
+                    "sFirst" : "第一页",
+                    "sPrevious" : "上一页",
+                    "sNext" : "下一页",
+                    "sLast" : "最后一页"
+                }
+            },
+        });
+    });
+</script>
+<script type="text/javascript">
+    jeDate({
+        dateCell: "#indate",
+        format: "YYYY-MM-DD hh:mm:ss", //控制是否显示小时
+        insTrigger:true,
+        isTime:true,                          //是否开启时间选择
+        hmsLimit:true,                        //时分秒限制
+        ishmsVal:true,
+    });
+</script>
+</body>
+</html>
